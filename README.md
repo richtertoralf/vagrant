@@ -23,3 +23,61 @@ C:\Users\toral>cd vagrant
 
 C:\Users\toral\vagrant>vagrant up
 ```
+```
+vagrant@ansiblehost:~$ 
+ssh-keygen -t rsa
+ssh-copy-id vagrant@192.168.50.10
+ssh-copy-id vagrant@192.168.50.20
+ssh-copy-id vagrant@192.168.50.30
+```
+`mkdir /etc/ansible`
+`sudo nano /etc/ansible/hosts`
+```
+[servers]
+machine1 ansible_host=192.168.50.10
+machine2 ansible_host=192.168.50.20
+machine3 ansible_host=192.168.50.30
+
+[all:vars]
+ansible_python_interpreter=/usr/bin/python3
+```
+`sudo nano /etc/ansible/inventory`
+```
+192.168.50.10
+192.168.50.20
+192.168.50.30
+```
+
+```
+vagrant@ansiblehost:/etc/ansible$ ansible-inventory --list -y
+all:
+  children:
+    servers:
+      hosts:
+        machine1:
+          ansible_host: 192.168.50.10
+          ansible_python_interpreter: /usr/bin/python3
+        machine2:
+          ansible_host: 192.168.50.20
+          ansible_python_interpreter: /usr/bin/python3
+        machine3:
+          ansible_host: 192.168.50.30
+          ansible_python_interpreter: /usr/bin/python3
+    ungrouped: {}
+```
+
+```
+vagrant@ansiblehost:/etc/ansible$ ansible all -m ping -u vagrant
+machine3 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+machine2 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+machine1 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+```
