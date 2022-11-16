@@ -1,4 +1,4 @@
-# vagrant
+# vagrant + ansible
 erste Schritte mit vagrant
 
 Schnell mal mit vagrant paar virtuelle Maschinen in VirtualBox erstellen. (Siehe Vagrantfile)
