@@ -44,6 +44,9 @@ vagrant@ansiblehost:~$
 sudo apt install sshpass
 mkdir -p ~/.ssh
 ssh-keyscan -t rsa machine1 machine2 machine3 > ~/.ssh/known_hosts
+```
+erster Test mit Ansible-ping, ob die Zielmachinen erreichbar sind:
+```
 ansible all -i machine1,machine2,machine3 -u vagrant -m ping -k
 machine1 | SUCCESS => {
     "ansible_facts": {
