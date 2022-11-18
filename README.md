@@ -1,4 +1,4 @@
-# vagrant + ansible
+# vagrant
 erste Schritte mit vagrant
 
 Schnell mal mit vagrant paar virtuelle Maschinen in VirtualBox erstellen. (Siehe Vagrantfile)
@@ -22,6 +22,44 @@ Vagrant 2.3.3
 C:\Users\toral>cd vagrant
 
 C:\Users\toral\vagrant>vagrant up
+```
+
+# ansible
+```
+vagrant@ansiblehost:~$ sudo nano /etc/hosts
+# insert:
+192.168.50.10 machine1
+192.168.50.20 machine2
+192.168.50.30 machine3
+```
+
+```
+vagrant@ansiblehost:~$
+sudo apt install sshpass
+mkdir -p ~/.ssh
+ssh-keyscan -t rsa machine1 machine2 machine3 > ~/.ssh/known_hosts
+ansible all -i machine1,machine2,machine3 -u vagrant -m ping -k
+machine1 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+machine3 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+machine2 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
 ```
 ```
 vagrant@ansiblehost:~$ 
