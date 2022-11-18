@@ -25,6 +25,7 @@ C:\Users\toral\vagrant>vagrant up
 ```
 
 # ansible
+erste Schritte mit ansible
 ```
 vagrant@ansiblehost:~$ sudo nano /etc/hosts
 # insert:
@@ -70,45 +71,67 @@ machine2 | SUCCESS => {
     "ping": "pong"
 }
 ```
-
+Erstellen eines inventory
 `mkdir /etc/ansible`
 `sudo nano /etc/ansible/hosts`
 ```
-[servers]
+[my_machines]
 machine1 ansible_host=192.168.50.10
 machine2 ansible_host=192.168.50.20
 machine3 ansible_host=192.168.50.30
 
-[all:vars]
-ansible_python_interpreter=/usr/bin/python3
+# [all:vars]
+# ansible_python_interpreter=/usr/bin/python3
 ```
-`sudo nano /etc/ansible/inventory`
 ```
-192.168.50.10
-192.168.50.20
-192.168.50.30
+vagrant@ansiblehost:~$ ansible all --list-hosts
+  hosts (3):
+    machine1
+    machine2
+    machine3
+```
+```
+vagrant@ansiblehost:~$ ansible all -m ping
+machine2 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+machine1 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+machine3 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
 ```
 
 ```
-vagrant@ansiblehost:/etc/ansible$ ansible-inventory --list -y
+vagrant@ansiblehost:~$ ansible-inventory --list -y
 all:
   children:
-    servers:
+    my_machines:
       hosts:
         machine1:
           ansible_host: 192.168.50.10
-          ansible_python_interpreter: /usr/bin/python3
         machine2:
           ansible_host: 192.168.50.20
-          ansible_python_interpreter: /usr/bin/python3
         machine3:
           ansible_host: 192.168.50.30
-          ansible_python_interpreter: /usr/bin/python3
     ungrouped: {}
 ```
 
 ```
-vagrant@ansiblehost:/etc/ansible$ ansible all -m ping -u vagrant
+vagrant@ansiblehost:~$ ansible all -m ping -u vagrant
 machine3 | SUCCESS => {
     "changed": false,
     "ping": "pong"
