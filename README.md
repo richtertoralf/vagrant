@@ -14,7 +14,7 @@ installiert ist ORACLE VirtualBox 6.1
 C:\Users\toral>git version
 git version 2.37.3.windows.1
 
-C:\Users\toral>git clone https://github.com/richtertoralf/vagrant.git
+C:\Users\toral>git clone https://github.com/richtertoralf/vagrant-ansible.git
 
 C:\Users\toral>vagrant -v
 Vagrant 2.3.3
