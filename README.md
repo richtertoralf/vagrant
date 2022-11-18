@@ -71,9 +71,9 @@ machine2 | SUCCESS => {
     "ping": "pong"
 }
 ```
-Erstellen eines inventory
-`mkdir /etc/ansible`
-`sudo nano /etc/ansible/hosts`
+## Erstellen eines inventory
+`mkdir /etc/ansible`  
+`sudo nano /etc/ansible/hosts`  
 ```
 [my_machines]
 machine1 ansible_host=192.168.50.10
