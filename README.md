@@ -32,7 +32,13 @@ vagrant@ansiblehost:~$ sudo nano /etc/hosts
 192.168.50.20 machine2
 192.168.50.30 machine3
 ```
-
+```
+vagrant@ansiblehost:~$ 
+ssh-keygen -t rsa
+ssh-copy-id vagrant@192.168.50.10
+ssh-copy-id vagrant@192.168.50.20
+ssh-copy-id vagrant@192.168.50.30
+```
 ```
 vagrant@ansiblehost:~$
 sudo apt install sshpass
@@ -61,13 +67,7 @@ machine2 | SUCCESS => {
     "ping": "pong"
 }
 ```
-```
-vagrant@ansiblehost:~$ 
-ssh-keygen -t rsa
-ssh-copy-id vagrant@192.168.50.10
-ssh-copy-id vagrant@192.168.50.20
-ssh-copy-id vagrant@192.168.50.30
-```
+
 `mkdir /etc/ansible`
 `sudo nano /etc/ansible/hosts`
 ```
