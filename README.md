@@ -25,7 +25,7 @@ C:\Users\toral>git clone https://github.com/richtertoralf/vagrant-ansible.git
 C:\Users\toral>vagrant -v
 Vagrant 2.3.3
 
-C:\Users\toral>cd vagrant
+C:\Users\toral>cd vagrant-ansible
 
 C:\Users\toral\vagrant>vagrant up
 ```
