@@ -6,6 +6,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "ansible_host" do |anshost|
+    anshost.vm.network "public_network"
     anshost.vm.network "private_network", ip: "192.168.50.100", virtualbox__intnet: "mynetwork"
     anshost.vm.hostname = "ansiblehost"
     anshost.vm.provider "virtualbox" do |vm|
