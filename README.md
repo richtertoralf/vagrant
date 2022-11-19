@@ -185,6 +185,30 @@ und Folgenden Inhalt in playbook-helloworld.yml einfügen:
         msg: Hello Ansible World
 ```
 Playbook ausführen:
+Das Passwort meiner mit vagrant erstellten Maschinen ist übrigens `vagrant`. 
 ```
 ansible-playbook -i inventory playbook-helloworld.yml -u vagrant
+```
+### Zugriff auf Systeminformationen
+```
+ansible all -i inventory -m setup -u vagrant
+```
+IPV4 Adressen auslesen
+```
+ansible all -i inventory -m setup -a "filter=*ipv4*" -u vagrant
+```
+```
+nano playbook-ipv4.yml
+```
+Einfügen:
+```
+- hosts: all
+  tasks:
+    - name: print facts
+      debug:
+        msg: "IPv4 address: {{ ansible_all_ipv4_addresses }}"
+```
+Playbook ausführen:
+```
+ansible-playbook -i inventory playbook-ipv4.yml -u vagrant
 ```
