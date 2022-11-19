@@ -1,11 +1,17 @@
 # vagrant
 erste Schritte mit vagrant
 
-Schnell mal mit vagrant paar virtuelle Maschinen in VirtualBox erstellen. (Siehe Vagrantfile)
+Schnell mal mit vagrant paar virtuelle Maschinen in VirtualBox erstellen. (Siehe Vagrantfile)  
+Ziel ist eine Laborumgebung zum Testen und Üben.
 
->Vagrant ist eine freie Ruby-Anwendung zum Erstellen und Verwalten virtueller Maschinen. Vagrant ermöglicht einfache Softwareverteilung (englisch Deployment) insbesondere in der Software- und Webentwicklung und dient als Wrapper zwischen Virtualisierungssoftware wie VirtualBox, KVM/QEMU, VMware und Hyper-V und Software-Configuration-Management-Anwendungen beziehungsweise Systemkonfigurationswerkzeugen wie Chef, Saltstack und Puppet.
+>Vagrant ist eine freie Ruby-Anwendung zum Erstellen und Verwalten virtueller Maschinen. Vagrant ermöglicht eine einfache Softwareverteilung (englisch Deployment) insbesondere in der Software- und Webentwicklung und dient als Wrapper zwischen Virtualisierungssoftware wie VirtualBox, KVM/QEMU, VMware und Hyper-V und Software-Configuration-Management-Anwendungen beziehungsweise Systemkonfigurationswerkzeugen wie Chef, Saltstack und Puppet.
 
-Nach der Erstellung der Maschinen will ich mit Ansible die Maschinen konfigurieren und verwalten.
+Nach der Erstellung der Maschinen mittels Vagrant will ich mit Ansible die Maschinen konfigurieren und verwalten.
+Ansible soll auf einer Linux-Maschine mit dem Hostname "ansiblehost" und der IP 192.168.50.100 in meinem privaten Netzwerk "mynetwork" laufen. Dies wird mit den folgenden Zeilen im Vagrantfile konfiguriert:
+```
+    anshost.vm.network "private_network", ip: "192.168.50.100", virtualbox__intnet: "mynetwork"
+    anshost.vm.hostname = "ansiblehost"
+```
 
 getestet 11/2022 auf meinem PC mit Windows 11 (AMD Ryzen 7 2700 Eight-Core Processor 3.20 GHz / Windows 11 Home Version 22H2)
 installiert ist ORACLE VirtualBox 6.1
