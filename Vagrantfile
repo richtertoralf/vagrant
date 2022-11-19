@@ -39,5 +39,5 @@ Vagrant.configure("2") do |config|
 end
 
 # Access to the ansible_host from my Windows machine:
-# ssh -i vagrant\.vagrant\machines\ansible_host\virtualbox/private_key -l vagrant -p 2222 localhost
+# ssh -i vagrant-ansible\.vagrant\machines\ansible_host\virtualbox/private_key -l vagrant -p 2222 localhost
 # The port will be displayed in the terminal during the installation.
