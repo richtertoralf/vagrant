@@ -32,6 +32,7 @@ C:\Users\toral\vagrant-ansible>vagrant up
 
 # ansible
 erste Schritte mit ansible
+## SSH Zugriff einrichten und ping testen
 ```
 vagrant@ansiblehost:~$ sudo nano /etc/hosts
 # insert:
@@ -150,4 +151,40 @@ machine1 | SUCCESS => {
     "changed": false,
     "ping": "pong"
 }
+```
+
+## Playbook
+Ich nutze meine schon vorhandene inventory-Datei `/etc/ansible/hosts`:
+```
+[my_machines]
+machine1 ansible_host=192.168.50.10
+machine2 ansible_host=192.168.50.20
+machine3 ansible_host=192.168.50.30
+
+# [all:vars]
+# ansible_python_interpreter=/usr/bin/python3
+```
+Erstelle aber im Userverzeichnis von `vagrant` zuerst einen neuen Ordner, kopiere meine inventory-Datei dorthin und lege dort meine neuen Playbooks ab. 
+```
+cd ~
+mkdir ansible-playbooks
+cd ansible-playbooks/
+cp /etc/ansible/hosts ~/ansible-playbooks/inventory
+```
+### Hallo Welt
+```
+cd ~/ansible-playbooks
+nano playbook-helloworld.yml
+```
+und Folgenden Inhalt in playbook-helloworld.yml einfügen:
+```
+- hosts: all
+  tasks:
+    - name: Print message
+      debug:
+        msg: Hello Ansible World
+```
+Playbook ausführen:
+```
+ansible-playbook -i inventory playbook-helloworld.yml -u vagrant
 ```
