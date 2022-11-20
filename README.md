@@ -297,6 +297,7 @@ machine2                   : ok=2    changed=1
 machine3                   : ok=2    changed=1
 ```
 ### Playbook Install-Webserver
+Ich installiere zusätzlich des nginx-rtmp Modul und PHP. Diese Webserver sollen für ein CDN für Streams genutzt werden. Die Installation muss noch optimiert werden. 
 ```
 - hosts: all
   become: yes
@@ -367,8 +368,8 @@ machine3                   : ok=2    changed=1
 
 ```
 Das obige Beispiel funktioniert so nur, wenn folgende Dateien im lokalen Order ~/ansible-playbooks/webserver fertig bereit liegen:  
-default
-info.php
-inventory
-nginx.conf
-rtmp.conf
+- default
+- info.php
+- inventory
+- nginx.conf
+- rtmp.conf
