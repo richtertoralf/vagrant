@@ -230,17 +230,17 @@ vagrant@ansiblehost:~/ansible-playbooks$ ansible-playbook -i inventory playbook-
 BECOME password:
 
 PLAY [all] ****************************************************
-TASK [Gathering Facts] ****************************************************
+TASK [Gathering Facts] ****************************************
 ok: [machine2]
 ok: [machine1]
 ok: [machine3]
 
-TASK [Update apt repo and cache on all Debian/Ubuntu boxes] ****************************************************
+TASK [Update apt repo and cache on all Debian/Ubuntu boxes] ***
 changed: [machine2]
 changed: [machine1]
 changed: [machine3]
 
-TASK [Upgrade all packages on servers] ****************************************************
+TASK [Upgrade all packages on servers] ************************
 changed: [machine3]
 changed: [machine1]
 changed: [machine2]
