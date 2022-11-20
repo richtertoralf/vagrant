@@ -296,7 +296,7 @@ machine1                   : ok=2    changed=1
 machine2                   : ok=2    changed=1
 machine3                   : ok=2    changed=1
 ```
-### Playbook Webserver
+### Playbook Install-Webserver
 ```
 - hosts: all
   become: yes
@@ -311,25 +311,64 @@ machine3                   : ok=2    changed=1
         - nginx
         - libnginx-mod-rtmp
         - php-fpm
-    # - name: Move default to default.old
-    #   copy: remote_src=True src=/etc/nginx/sites-available/default dest=/etc/nginx/sites-available/default.old
+
+    - name: delete default nginx.conf
+      file:
+        path: /etc/nginx/nginx.conf
+        state: absent
+      notify: restart nginx
+
+    - name: copy new /etc/nginx/nginx.conf
+      copy:
+        src: ~/ansible-playbooks/webserver/nginx.conf
+        dest: /etc/nginx/
+      notify: restart nginx
+
     - name: copying new default file from local to remote
-      copy: 
-        src: ~/ansible-playbooks/config_webserver/default
-        dest: /etc/nginx/sites-enabled/
-      notify: 
-      - restart nginx
-      - restart php-fpm
+      copy:
+        src: ~/ansible-playbooks/webserver/default
+        dest: /etc/nginx/sites-available/
+      notify:
+        - restart nginx
+
+    - name: copying new rtmp.conf file from local to remote
+      copy:
+        src: ~/ansible-playbooks/webserver/rtmp.conf
+        dest: /etc/nginx/sites-available/
+      notify:
+        - restart nginx
+
+    - name: Creates directory
+      file:
+        path: /var/www/html/stream
+        state: directory
+
+    - name: create symbolic link
+      file:
+        src: /etc/nginx/sites-available/rtmp.conf
+        dest: /etc/nginx/sites-enabled/rtmp.conf
+        state: link
+      notify:
+        - restart nginx
+
     - name: copying info.php
       copy:
-        src: ~/ansible-playbooks/config_webserver/info.php
+        src: ~/ansible-playbooks/webserver/info.php
         dest: /var/www/html
         owner: www-data
         group: www-data
-        mode: 0644
+        mode: 0775
+
   handlers:
     - name: restart nginx
-      service: name=nginx state=restarted
-    - name: restart php-fpm
-      service: name=php-fpm state=restarted
+      service: 
+        name: nginx
+        state: restarted
+
 ```
+Das obige Beispiel funktioniert so nur, wenn folgende Dateien im lokalen Order ~/ansible-playbooks/webserver fertig bereit liegen:  
+default
+info.php
+inventory
+nginx.conf
+rtmp.conf
