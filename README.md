@@ -296,3 +296,40 @@ machine1                   : ok=2    changed=1
 machine2                   : ok=2    changed=1
 machine3                   : ok=2    changed=1
 ```
+### Playbook Webserver
+```
+- hosts: all
+  become: yes
+  tasks:
+    - name: Update apt cache and make sure curl, nano, nginx and php-fpm are installed
+      apt:
+        name: "{{ item }}"
+        update_cache: yes
+      loop:
+        - curl
+        - nano
+        - nginx
+        - libnginx-mod-rtmp
+        - php-fpm
+    # - name: Move default to default.old
+    #   copy: remote_src=True src=/etc/nginx/sites-available/default dest=/etc/nginx/sites-available/default.old
+    - name: copying new default file from local to remote
+      copy: 
+        src: ~/ansible-playbooks/config_webserver/default
+        dest: /etc/nginx/sites-enabled/
+      notify: 
+      - restart nginx
+      - restart php-fpm
+    - name: copying info.php
+      copy:
+        src: ~/ansible-playbooks/config_webserver/info.php
+        dest: /var/www/html
+        owner: www-data
+        group: www-data
+        mode: 0644
+  handlers:
+    - name: restart nginx
+      service: name=nginx state=restarted
+    - name: restart php-fpm
+      service: name=php-fpm state=restarted
+```
