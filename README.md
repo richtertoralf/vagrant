@@ -212,3 +212,44 @@ Playbook ausführen:
 ```
 ansible-playbook -i inventory playbook-ipv4.yml -u vagrant
 ```
+### Playbook update & upgrade
+`nano playbook-update.yml`
+```
+- hosts: all
+  become: yes
+  tasks:
+    - name: Update apt repo and cache on all Debian/Ubuntu boxes
+      apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+
+    - name: Upgrade all packages on servers
+      apt: upgrade=dist force_apt_get=yes
+```
+`ansible-playbook -i inventory playbook-update.yml -u vagrant -K`
+```
+vagrant@ansiblehost:~/ansible-playbooks$ ansible-playbook -i inventory playbook-update.yml -u vagrant -K
+BECOME password:
+
+PLAY [all] ****************************************************
+TASK [Gathering Facts] ****************************************************
+ok: [machine2]
+ok: [machine1]
+ok: [machine3]
+
+TASK [Update apt repo and cache on all Debian/Ubuntu boxes] ****************************************************
+changed: [machine2]
+changed: [machine1]
+changed: [machine3]
+
+TASK [Upgrade all packages on servers] ****************************************************
+changed: [machine3]
+changed: [machine1]
+changed: [machine2]
+
+PLAY RECAP ****************************************************
+machine1                   : ok=3    changed=2 
+
+machine2                   : ok=3    changed=2 
+
+machine3                   : ok=3    changed=2 
+
+```
