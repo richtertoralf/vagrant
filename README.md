@@ -247,9 +247,52 @@ changed: [machine2]
 
 PLAY RECAP ****************************************************
 machine1                   : ok=3    changed=2 
-
 machine2                   : ok=3    changed=2 
-
 machine3                   : ok=3    changed=2 
+```
+### Playbook install programs
+`nano playbook-install_programs.yml`
+```
+- hosts: all
+  become: yes
+  tasks:
+    - name: Update apt cache and make sure curl, nano, nginx and php-fpm are installed
+      apt:
+        name: "{{ item }}"
+        update_cache: yes
+      loop:
+        - curl
+        - nano
+        - nginx
+        - php-fpm
+```
+```
+vagrant@ansiblehost:~/ansible-playbooks$ ansible-playbook -i inventory playbook-install_programs.yml -u vagrant -K
+BECOME password:
 
+PLAY [all] ***************************
+
+TASK [Gathering Facts] ***************
+ok: [machine2]
+ok: [machine3]
+ok: [machine1]
+
+TASK [Update apt cache and make sure curl, nano, nginx and php-fpm are installed] *****
+ok: [machine1] => (item=curl)
+ok: [machine2] => (item=curl)
+ok: [machine3] => (item=curl)
+ok: [machine1] => (item=nano)
+ok: [machine3] => (item=nano)
+ok: [machine2] => (item=nano)
+changed: [machine1] => (item=nginx)
+changed: [machine3] => (item=nginx)
+changed: [machine2] => (item=nginx)
+changed: [machine1] => (item=php-fpm)
+changed: [machine2] => (item=php-fpm)
+changed: [machine3] => (item=php-fpm)
+
+PLAY RECAP ****************************
+machine1                   : ok=2    changed=1
+machine2                   : ok=2    changed=1
+machine3                   : ok=2    changed=1
 ```
