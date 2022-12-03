@@ -307,7 +307,7 @@ machine2                   : ok=2    changed=1
 machine3                   : ok=2    changed=1
 ```
 ### Playbook Install-Webserver
-Ich installiere zusätzlich des nginx-rtmp Modul und PHP. Diese Webserver sollen für ein CDN für Streams genutzt werden. Die Installation muss noch optimiert werden. 
+Ich installiere zusätzlich des nginx-rtmp Modul und PHP. Diese Webserver sollen für ein CDN für Streams genutzt werden. Die Installation muss ich noch vereinfachen und aktualisieren. So ist z.B. die Verwendung von sites-available und sites-enabled eigentlich veraltet bzw. für einfache Konfigurationen nicht notwendig. NGINX empfiehlt stattdessen, individeulle Konfigurationsdateien in /etc/nginx/conf.d/ abzulegen.
 ```
 - hosts: all
   become: yes
