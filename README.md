@@ -6,6 +6,13 @@ Ziel ist eine Laborumgebung zum Testen und Üben.
 
 >Vagrant ist eine freie Ruby-Anwendung zum Erstellen und Verwalten virtueller Maschinen. Vagrant ermöglicht eine einfache Softwareverteilung (englisch Deployment) insbesondere in der Software- und Webentwicklung und dient als Wrapper zwischen Virtualisierungssoftware wie VirtualBox, KVM/QEMU, VMware und Hyper-V und Software-Configuration-Management-Anwendungen beziehungsweise Systemkonfigurationswerkzeugen wie Chef, Saltstack und Puppet.
 
+>Wie immer gilt es paar Details zu beachten :-)  
+>Zuerst werden die VM´s mit Vagrant erstellt.  
+>Damit später ein automatisierter Zugriff, z.B. mit Ansible, möglich ist, brauchen wir ein passendes "SSH-Schlüsselmanagement". Wir müssen uns dabei folgende Fragen stellen:  
+>Wie erstelle ich meine SSH-Schlüssel?  
+>Wie organisiere ich den Schlüsselaustausch?  
+>Wie immer, gibt es dafür viele Lösungsmöglichkeiten. Dazu weiter unten mehr :-)  
+
 Nach der Erstellung der Maschinen mittels Vagrant will ich mit Ansible die Maschinen konfigurieren und verwalten.
 Ansible soll auf einer Linux-Maschine mit dem Hostname "ansiblehost" und der IP 192.168.50.100 in meinem privaten Netzwerk "mynetwork" laufen. Dies wird mit den folgenden Zeilen im Vagrantfile konfiguriert:
 ```
@@ -29,6 +36,9 @@ C:\Users\toral>cd vagrant-ansible
 
 C:\Users\toral\vagrant-ansible>vagrant up
 ```
+
+# Schlüsseltausch
+Muss ich noch sortieren. Will ich zukünftig gleich direkt im Vagrantfile automatisch erledigen.
 
 # ansible
 erste Schritte mit ansible
