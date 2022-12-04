@@ -38,7 +38,8 @@ C:\Users\toral\vagrant-ansible>vagrant up
 ```
 
 # Schlüsseltausch
-Muss ich noch sortieren. Will ich zukünftig gleich direkt im Vagrantfile automatisch erledigen.
+Muss ich noch sortieren. Will ich zukünftig gleich direkt über das Vagrantfile automatisch erledigen.
+Vagrant erstellt per default für jede Maschine ssh-Schlüsselpaare. Vagrant legt auf dem Host, dort wo Vagrant gestartet wird, für jede erstellte Maschine einen Ordner an, in dem der jeweilige "private_key" liegt. In den neu erstellten Maschinen wird der jeweilige öffentliche Schlüssel in die Datei ~/.ssh/authorized_keys für den User vagrant eingetragen. Der erste Zugriff auf eine neu erstellte Maschine kann z.B. so erfolgen `PS C:\Users\toral> ssh -i vagrant-ansible\.vagrant\machines\machine_1\virtualbox/private_key -l vagrant -p 2200 localhost ` 
 
 # ansible
 erste Schritte mit ansible
