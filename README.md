@@ -19,7 +19,8 @@ Nach der Erstellung der Maschinen mittels Vagrant will ich mit Ansible die Masch
 
 ----   
 **STOP**  
-Das Folgende waren meine ersten Schritte. Inzwischen habe ich gerlernt, das ich sowohl mit Ansible, als auch Vagrant die Virtuellen Maschinen in VirtualBox erstellen kann. Ich denke, das es Sinn macht. sich mit beidenTools und zusätzlich auch mit Teraform zu beschäftigen. Sonst ist jedes Problem ein Nagel und du nimmst immer den hammer ;-)   
+Das Folgende waren meine ersten Schritte. Inzwischen habe ich gerlernt, das ich sowohl mit Ansible, als auch mit Vagrant die virtuellen Maschinen in VirtualBox erstellen kann. Ich denke, das es Sinn macht, sich mit beidenTools zu beschäftigen.  
+Sonst ist jedes Problem ein Nagel und du nimmst immer den hammer ;-)   
 
 ----   
 
