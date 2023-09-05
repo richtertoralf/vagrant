@@ -20,7 +20,7 @@ Nach der Erstellung der Maschinen mittels Vagrant will ich mit Ansible die Masch
 ----   
 **STOP**  
 Das Folgende waren meine ersten Schritte. Inzwischen habe ich gerlernt, das ich sowohl mit Ansible, als auch Vagrant die Virtuellen Maschinen in VirtualBox erstellen kann. Ich denke, das es Sinn macht. sich mit beidenTools und zusätzlich auch mit Teraform zu beschäftigen. Sonst ist jedes Problem ein Nagel und du nimmst immer den hammer ;-)   
-**!**  
+
 ----   
 
 Ansible soll auf einer Linux-Maschine mit dem Hostname "ansiblehost" und der IP 192.168.50.100 in meinem privaten Netzwerk "mynetwork" laufen. Dies wird mit den folgenden Zeilen im Vagrantfile konfiguriert:
